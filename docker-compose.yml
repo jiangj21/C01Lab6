@@ -1,17 +1,23 @@
 version: "3"
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile_backend
-      target: backend
-    # image: <jiangj21>/quirknotes_backend:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile_backend
+    #   target: backend
+    image: jiangj21/quirknotes_backend:latest
     ports:
       - "4000:4000"
     environment:
       - ENV=Docker
     depends_on:
       - mongodb
+  frontend:
+    image: jiangj21/quirknotes_frontend:latest
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
   mongodb:
     image: mongo:latest
